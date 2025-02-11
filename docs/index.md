@@ -4,22 +4,12 @@ layout: home
 
 hero:
   name: "Neutralino"
-  text: "Moderner development tutorial for 1.12.2 Forge Mod"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+  tagline: 更新、更现代，基于 Harbinger（MIT）进行再次更新
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Mod Development Kit
+    details: 基于 CleanroomMC/TemplateDevEnv 而不是 Forge MDK，一站式开发环境！
+    link: https://github.com/CleanroomMC/TemplateDevEnv
+    linkText: 点击进入开发环境仓库（GitHub）
 ---
 
