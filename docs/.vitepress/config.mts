@@ -6,20 +6,56 @@ export default defineConfig({
   description: "Moderner development tutorial for 1.12.2 Forge Mod",
   base: "/Neutralino/",
   head: [["link", { rel: "icon", sizes: "32x32", href: "https://zh.minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png?8310b" }]],
+
   ignoreDeadLinks: true,
+  lastUpdated: true,
+  cleanUrls: true,
+
+  markdown: {
+    lineNumbers: true,
+  },
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: "https://zh.minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png?8310b",
+
+    returnToTopLabel: "返回顶部",
+    sidebarMenuLabel: "目录",
+
+    outline: {
+      label: "当前页大纲",
+    },
+
+    editLink: {
+      pattern:
+        "https://github.com/Oganesson897/Neutralino/edit/master/docs/:path",
+      text: "在Github上编辑该页",
+    },
+
+    lastUpdated: {
+      text: "上次更新时间",
+    },
+
+    search: {
+      options: {
+        // Removes versioned and translated pages from search.
+        _render(src, env, md) {
+          return md.render(src, env);
+        },
+      },
+      provider: "local",
+    },
+
     nav: [
       { text: '主页', link: '/' },
-      { text: 'Examples', link: '/chapter-01/forge' }
+      { text: '快速开始', link: '/readme' }
     ],
 
     sidebar: [
       {
         text: '前言',
         items: [
-          { text: '写在前面：这是什么？', link: '/readme.md' },
+          { text: '写在前面：这是什么？', link: '/readme' },
           { text: '序：《异教与隐士》', link: 'preface/index' }
         ]
       },
