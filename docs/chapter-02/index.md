@@ -3,31 +3,16 @@
 ## 开发环境部署
 其实部署一个基于 Forge 的 Mod 的开发环境还是很简单的。比以前不知道简单到哪里去了。
 
-  1. 首先下载 Forge 的 Mod Development Kit（MDK）。打开 [Forge的下载页面][ref-forge-home]，页面顶部有一个“Download Latest”，下面有一行小字写着 `1.12.2-14.23.5.2836`，再往下看一点，那个写着 Mdk 的链接便是。
+  1. 首先下载 CleanroomMC 的 TemplateDevEnv（MDK）。打开 [GitHub 仓库][ref-forge-home]，点击“Code -> Download Zip”便会开始下载 zip 文件。  
   2. 解压下载到的 zip。务必要能看见诸如 `build.gradle`、`gradlew`、`gradlew.bat`、`.gitignore` 等文件。
-  3. 有鉴于本指南使用的 MCP 版本是 `stable_39`，请用文本编辑器打开 `build.gradle`，找到：
-  ```groovy
-  minecraft {
-      //...
-      mapping = "..."
-      //...
-  }
-  ```
-     [将 `mapping = "..."` 改成 `mapping = "stable_39"`](../chapter-01/forgegradle.html)。
-  4. 根据你的具体情况不同，在命令行中，切换到 MDK 的目录，然后：
+  3. 安装一个支持 Gradle 的 IDE（集成开发环境，本文推荐并且默认使用 `Intellij IDEA`）。
+  3. 使用 IDEA 打开 MDK 中的 `build.gradle` 文件（需通过项目打开并且信任项目）。
+  4. 等待 IDEA 导入 Gradle 项目（可能需要网络代理或加速器来访问 Maven）。
+  5. 在开始之前，需要一些合适的 IDEA 插件，例如 [Minecraft Dev RFG](https://github.com/eigenraven/MinecraftDev/releases)，下载最新 Release 后在 IDEA 中通过磁盘安装插件（记住后续不要在 IDEA 内直接更新插件，需手动卸载后重新从 GitHub 下载新版本）。
+  6. 成功导入 Gradle 项目后（显示 `BUILD SUCCESSFUL` 后），打开侧边栏的 `Gradle Tasks`，找到 `Tasks - modder minecraft - setupDecompWorkspace` 双击运行。
+  7. 在运行成功（显示 `BUILD SUCCESSFUL` 后），基本的配置就已经完成了。
 
-    - Windows（CMD、PowerShell 等）：`gradlew.bat setupDecompWorkspace`。注意权限。
-    - 某种 Linux 发行版，或 macOS：`./gradlew setupDecompWorkspace`。注意权限。
-    - 其他系统：很抱歉，Minecraft 所依赖的 LWJGL 只有针对 Windows、macOS 和 Linux 三类系统的 native lib。
-  5. 根据你使用的 IDE 不同，执行下列对应命令后，在对应的 IDE 中以 Gradle 项目的形式导入项目：
-
-    * Eclipse：在 `setupDecompWorkspace` 后接上 `eclipse`
-    * IntelliJ IDEA：恭喜你，在这里你不需要加任何东西。
-    * 其他 IDE：不好意思你需要找对应的 Gradle 插件来解决问题，请查阅相关资料获得更多帮助。在这里的话就什么也不用加好了。
-  6. 回车运行。若看到 `BUILD SUCCESSFUL` 字样则表示大功告成，否则重复步骤 3. 和 4.，直到看到那个 `BUILD SUCCESSFUL` 为止。
-  7. 在你使用的 IDE 中以 Gradle 项目的形式导入工程目录。
-
-[ref-forge-home]: https://files.minecraftforge.net/
+[ref-forge-home]: https://github.com/CleanroomMC/TemplateDevEnv
 
 ### 常见问题
 
@@ -39,20 +24,133 @@
 
 [ref-zzzz-tutorial]: https://fmltutor.ustc-zzzz.net/1.1-%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83.html#%E9%85%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83
 
-### 在 Eclipse 中运行 Minecraft
+## gradle.properties 设置
+```properties
+# Source Options
+# 该选项用于设置是否启用新版本 Java 的语法（Java 17、21）
+# 例如模式变量，var等语法
+use_modern_java_syntax = false
 
-不需要任何额外操作，成功导入项目后你应该能找到对应的 Configuration 了。只需要“Run As…”或者“Debug As…”即可。
+# Compilation Options
+# 用于设置是否构建 Sources 和 Javadoc 的 Jar
+generate_sources_jar = true
+generate_javadocs_jar = false
 
-### 在 IDEA 中运行 Minecraft
+# Testing
+# 代码测试工具
+enable_junit_testing = true
+show_testing_output = false
 
-因为某些原因，你需要手动配置你的项目才能在 IDEA 中运行 Minecraft 并进行调试。幸运的是 ForgeGradle 提供了一个简化这个操作的 task，它可以帮你生成所有必须的配置：
+# Mod Information
+# 推荐 mod_version 使用semver格式: https://semver.org/
+# 此栏为模组基本信息
+mod_version = 1.0.0
+root_package = com.example
+mod_id = modid
+mod_name = Mod Name
 
-```bash
-$ ./gradlew genIntellijRuns
+# Mod Metadata (Optional)
+# 用于生成 mcmod.info 的内容，可留空
+mod_description =
+mod_url =
+mod_update_json =
+# Delimit authors with commas
+mod_authors =
+mod_credits =
+mod_logo_path =
+
+# Mapping Properties
+# 映射表设置
+mapping_channel = stable
+mapping_version = 39
+use_dependency_at_files = true
+
+# Run Configurations
+# If multiple arguments/tweak classes are stated, use spaces as the delimiter
+# 测试环境设置
+minecraft_username = Developer
+extra_jvm_args =
+extra_tweak_classes =
+
+# Maven Publishing (Provide secret: MAVEN_USER, MAVEN_PASS)
+# Maven 发布设置
+publish_to_maven = false
+# Good for debugging artifacts before uploading to remote maven
+# GitHub actions won't run if this is true, test this by running the task `publishToMavenLocal`
+publish_to_local_maven = false
+maven_name = ${mod_name}
+maven_url =
+
+# Publishing
+# release_type can only be: release, beta or alpha (applies to CurseForge / Modrinth)
+release_type = release
+publish_with_changelog = ${{ it.file('CHANGELOG.md').exists() }}
+
+# Publishing to CurseForge (Provide secret: CURSEFORGE_TOKEN)
+# To configure dependencies, head to publishing.gradle's curseforge block
+publish_to_curseforge = false
+# CurseForge project ID must be the numerical ID and not the slug
+curseforge_project_id =
+curseforge_debug = false
+
+# Publishing to Modrinth (Provide secret: MODRINTH_TOKEN), the token must have the `CREATE_VERSION` and `PROJECT_WRITE` permissions
+# To configure dependencies, head to publishing.gradle's modrinth block
+publish_to_modrinth = false
+modrinth_project_id =
+# Allows gradle to publish updated READMEs to the project body (via the modrinthSyncBody task)
+modrinth_sync_readme = false
+modrinth_debug = false
+
+# If any properties changes below this line, refresh gradle again to ensure everything is working correctly.
+
+# Modify Minecraft Sources
+# RetroFuturaGradle allows Minecraft sources to be edited, and have the changes reflected upon running it
+# Good for previews when coremodding, or generally seeing how behaviours can change with certain code applied/unapplied
+# Turning this on allows Minecraft sources to persist and not regenerate
+change_minecraft_sources = false
+
+# Tags
+# RFG 会在指定的地方生成一个用于存储信息的工具类，你可以自行定义其生成的内容
+# 见 tag.properties
+use_tags = true
+tag_class_name = ${root_package}.${mod_id}.Tags
+
+# 访问
+use_access_transformer = false
+access_transformer_locations = ${mod_id}_at.cfg
+
+# Mixins
+# Powerful tool to do runtime description changes of classes
+# Wiki: https://github.com/SpongePowered/Mixin/wiki + https://github.com/CleanroomMC/MixinBooter/ + https://cleanroommc.com/wiki/forge-mod-development/mixin/preface
+# 用于修改字节码
+# Mixin 介绍和教程：https://xfl03.gitbook.io/coremodtutor/5
+use_mixins = false
+mixin_booter_version = 10.2
+# A configuration defines a mixin set, and you may have as many mixin sets as you require for your application.
+# Each config can only have one and only one package root.
+# Generate missing configs, obtain from mixin_configs and generate file base on name convention: "mixins.config_name.json"
+# You should change package root once they are generated
+generate_mixins_json = true
+# Delimit configs with spaces. Should only put configs name instead of full file name
+mixin_configs = ${mod_id}
+# A refmap is a json that denotes mapping conversions, this json is generated automatically, with the name `mixins.mod_id.refmap.json`
+# Use the property `mixin_refmap` if you want it to use a different name, only one name is accepted
+mixin_refmap = mixins.${mod_id}.refmap.json
+
+# Coremods
+# Coremod 设置
+is_coremod = false
+coremod_includes_mod = true
+coremod_plugin_class_name =
+
+# AssetMover
+# Convenient way to allow downloading of assets from official vanilla Minecraft servers, CurseForge, or any direct links
+# Documentation: https://github.com/CleanroomMC/AssetMover
+use_asset_mover = false
+asset_mover_version = 2.5
 ```
 
-运行完之后你便能在 "Run…" 中找到名为“Minecraft Client”和“Minecraft Server”的配置了。  
-注意：这个 task 必须在项目已经导入进 IDEA 之后运行！<black>你以为刚才比 Eclipse 用户少打一行就算完了吗（笑）</black>
+这些设置会直接帮你配置大部分的环境设置，以便于你无需自行修改 `build.gradle`。
 
 ## 入口类
 

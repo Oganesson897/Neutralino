@@ -1,12 +1,13 @@
-# Harbinger
+# Neutralino
 
-Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。身为读者的你，需要记住以下事项：
+Neutralino 是一套更现代化的 Harbinger，并且志在修复文章错误/增补 WIP 内容，并且将会继续更新。  
+> Harbinger 是一套全面的，基于 Forge 的，中文 Minecraft Mod 开发指南。  
+身为读者的你，需要记住以下事项：
 
 * **如无特殊说明，本教程基于 Minecraft 1.12.2 Release 和 Forge 14.23.5.2836，MCP Mapping 版本使用 `stable_39`。本教程原则上不涉及任何旧版内容。**
-  * 适用于新版本的 Minecraft+Forge 的指南已经提上日程，还请稍安勿躁。
-* 如有疑问，欢迎到[本项目的问题追踪器](https://github.com/TeamCovertDragon/Harbinger/issues)中提出，亦可在[本项目的讨论版](https://github.com/TeamCovertDragon/Harbinger/discussions)中先进行讨论。
+* 如有疑问，欢迎到[本项目的问题追踪器](https://github.com/Oganesson897/Neutralino/issues)中提出，亦可在[本项目的讨论版](https://github.com/Oganesson897/Neutralino/discussions)中先进行讨论。
 * 本教程使用的目录分隔符（directory separator）统一为 `/`。
-* 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，只是笔者不会 Scala。
+* 这里不是 Java 教程。你必须掌握至少一门基于 JVM 的编程语言。对零基础新人来说，Java 就可以，先去花点时间把 Java 学了。Scala 用户用 Scala 当然也是十分欢迎的，~~只是笔者不会 Scala~~。
 
   > 什么叫“降低门槛”？要我说，我已经很久没见到比国内MC圈的开发门槛还要低的圈子了，软件版和编程版的门槛已经低到不能再低了。至少对于我而言，我已经在无数个场合说过无数次了，学开发插件/Mod的时候，先花上几个月把Java学了，然后再学会很轻松。实际上呢？我接触过的连Java基本语法都没了解清楚就去学写插件/Mod的人，实在是太多太多了。Java实际上，甚至可以说是最简单的现代编程语言之一。至于多了解了解其他的编程语言，多学习学习一些计算机科学的知识，什么数据结构啊，设计模式啊，组成原理啊，这些本来应该是程序猿提升自我理应做的事情，对于他们来说，我真是想都不敢想。  
   >
