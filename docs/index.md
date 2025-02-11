@@ -5,8 +5,7 @@ layout: home
 hero:
   name: "Neutralino"
   tagline: 更新、更现代，基于 Harbinger（MIT）进行再次更新
-
-actions:
+  actions:
     - theme: brand
       text: 什么是 Neutralino
       link: /readme
