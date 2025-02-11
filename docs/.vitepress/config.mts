@@ -6,6 +6,8 @@ export default defineConfig({
   description: "Moderner development tutorial for 1.12.2 Forge Mod",
   base: "/Neutralino/",
   head: [["link", { rel: "icon", sizes: "32x32", href: "https://zh.minecraft.wiki/images/thumb/Book_JE2_BE2.png/150px-Book_JE2_BE2.png?8310b" }]],
+  ignoreDeadLinks: true,
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
